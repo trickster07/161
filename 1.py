@@ -28,6 +28,16 @@ while True:
         query = input("[*] Use Shodan API to search for affected Memcached servers? <Y/n>: ").lower()
         if query.startswith('y'):
             print('')
+            
+            # Search Shodan
+            results = api.search('apache')
+            # Show the results
+            print ('Results found: %s' % results['total'])
+            for result in results['matches']:
+                print('IP: %s' % result['ip_str'])
+                print(result['data'])
+                print('')
+           
             print('[~] Checking Shodan.io API Key: %s' % SHODAN_API_KEY)
             results = api.search('product:"Memcached" port:11211 -has_ipv6:true')
             print('[✓] API Key Authentication: SUCCESS')
