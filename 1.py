@@ -33,8 +33,6 @@ while True:
             print('[✓] API Key Authentication: SUCCESS')
             print('[~] Number of bots: %s' % results['total'])
             print('')
-            print(results['matches'])
-            print('')
             saveresult = input("[*] Save results for later usage? <Y/n>: ").lower()
             if saveresult.startswith('y'):
                 file2 = open('./bots.txt', 'a')
@@ -104,7 +102,6 @@ while True:
                 print('100')
 
                 results = api.search('-has_ipv6:true product:"Memcached" port:11211')
-                print(results['matches'])
                 print('')
                 for result in results['matches']:
                     if power>1:
@@ -118,7 +115,6 @@ while True:
                 print('200')
     
                 results = api.search('-has_ipv6:true port:11211 product:"Memcached"')
-                print(results['matches'])
                 print('')
                 for result in results['matches']:
                     if power>1:
@@ -132,7 +128,6 @@ while True:
                 print('300')
 
                 results = api.search('product:"Memcached" -has_ipv6:true port:11211')
-                print(results['matches'])
                 print('')
                 for result in results['matches']:
                     if power>1:
@@ -146,7 +141,6 @@ while True:
                 print('400')
     
                 results = api.search('port:11211 -has_ipv6:true product:"Memcached"')
-                print(results['matches'])
                 print('')
                 for result in results['matches']:
                     if power>1:
@@ -160,7 +154,6 @@ while True:
                 print('500')
 
                 results = api.search('port:11211 product:"Memcached" -has_ipv6:true')
-                print(results['matches'])
                 print('')
                 for result in results['matches']:
                     if power>1:
