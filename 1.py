@@ -33,7 +33,7 @@ while True:
             print('[✓] API Key Authentication: SUCCESS')
             print('[~] Number of bots: %s' % results['total'])
             print('')
-	    ebat = results['total']
+	    ebat = results('total')
             saveresult = input("[*] Save results for later usage? <Y/n>: ").lower()
             if saveresult.startswith('y'):
                 file2 = open('./bots.txt', 'a')
