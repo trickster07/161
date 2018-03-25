@@ -106,7 +106,6 @@ while True:
                 while True:
                     results = api.search('-has_ipv6:true product:"Memcached" port:11211')
 
-                    engage = y
                     if engage.startswith('y'):
                         if saveme.startswith('y'):
                             for i in ip_array:
